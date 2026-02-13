@@ -58,59 +58,59 @@ import asyncio
 from asyncio.subprocess import PIPE
 
 async def generate_wireguard_keys() -> tuple[str, str]:
-    """
-    Asynchronously generates a WireGuard private and public key pair.
-    The keys are held strictly in memory and never written to disk.
-    """
-    try:
-        # 1. Generate Private Key
-        # This calls 'wg genkey' and captures the standard output in memory
-        proc_priv = await asyncio.create_subprocess_exec(
-            "wg", "genkey",
-            stdout=PIPE,
-            stderr=PIPE
-        )
-        stdout_priv, stderr_priv = await proc_priv.communicate()
-        
-        if proc_priv.returncode != 0:
-            raise RuntimeError(f"Failed to generate private key: {stderr_priv.decode()}")
-            
-        private_key = stdout_priv.decode('utf-8').strip()
+ """
+ Asynchronously generates a WireGuard private and public key pair.
+ The keys are held strictly in memory and never written to disk.
+ """
+ try:
+ # 1. Generate Private Key
+ # This calls 'wg genkey' and captures the standard output in memory
+ proc_priv = await asyncio.create_subprocess_exec(
+ "wg", "genkey",
+ stdout=PIPE,
+ stderr=PIPE
+ )
+ stdout_priv, stderr_priv = await proc_priv.communicate()
+ 
+ if proc_priv.returncode != 0:
+ raise RuntimeError(f"Failed to generate private key: {stderr_priv.decode()}")
+ 
+ private_key = stdout_priv.decode('utf-8').strip()
 
-        # 2. Generate Public Key from Private Key
-        # We pass the private_key string directly into 'wg pubkey' via standard input
-        proc_pub = await asyncio.create_subprocess_exec(
-            "wg", "pubkey",
-            stdin=PIPE,
-            stdout=PIPE,
-            stderr=PIPE
-        )
-        stdout_pub, stderr_pub = await proc_pub.communicate(input=private_key.encode('utf-8'))
-        
-        if proc_pub.returncode != 0:
-            raise RuntimeError(f"Failed to generate public key: {stderr_pub.decode()}")
-            
-        public_key = stdout_pub.decode('utf-8').strip()
+ # 2. Generate Public Key from Private Key
+ # We pass the private_key string directly into 'wg pubkey' via standard input
+ proc_pub = await asyncio.create_subprocess_exec(
+ "wg", "pubkey",
+ stdin=PIPE,
+ stdout=PIPE,
+ stderr=PIPE
+ )
+ stdout_pub, stderr_pub = await proc_pub.communicate(input=private_key.encode('utf-8'))
+ 
+ if proc_pub.returncode != 0:
+ raise RuntimeError(f"Failed to generate public key: {stderr_pub.decode()}")
+ 
+ public_key = stdout_pub.decode('utf-8').strip()
 
-        return private_key, public_key
+ return private_key, public_key
 
-    except FileNotFoundError:
-        raise RuntimeError("The 'wg' command was not found. Is WireGuard installed and in your system PATH?")
+ except FileNotFoundError:
+ raise RuntimeError("The 'wg' command was not found. Is WireGuard installed and in your system PATH?")
 
 # --- Validation Block ---
 # This block only runs if you execute this file directly.
 async def _test_keygen():
-    print("🚀 Testing Antigravity Key Generation...")
-    try:
-        priv, pub = await generate_wireguard_keys()
-        print("✅ Success!")
-        print(f"🔒 Private Key (Memory Only): {priv}")
-        print(f"🌍 Public Key (Safe to share): {pub}")
-    except Exception as e:
-        print(f"❌ Error: {e}")
+ print(" Testing Antigravity Key Generation...")
+ try:
+ priv, pub = await generate_wireguard_keys()
+ print("[COMPLETE] Success!")
+ print(f" Private Key (Memory Only): {priv}")
+ print(f" Public Key (Safe to share): {pub}")
+ except Exception as e:
+ print(f"[NO] Error: {e}")
 
 if __name__ == "__main__":
-    asyncio.run(_test_keygen())
+ asyncio.run(_test_keygen())
 
 ```
 

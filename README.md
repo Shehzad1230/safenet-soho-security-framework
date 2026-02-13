@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛡️ SafeNet SOHO Security Framework
+# SafeNet SOHO Security Framework
 
 **A Zero-Trust Micro-Perimeter Framework for Small Office/Home Office Environments**
 
@@ -17,7 +17,7 @@
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#-overview)
 - [Key Features](#-key-features)
@@ -34,7 +34,7 @@
 
 ---
 
-## 🌟 Overview
+## Overview
 
 **Project SafeNet** is a lightweight, policy-driven Zero-Trust security framework designed for SOHO (Small Office/Home Office) environments. It leverages WireGuard to create an encrypted mesh network with declarative access control policies, all managed through a modern asynchronous Python backend.
 
@@ -45,34 +45,34 @@ Traditional home networks are **flat** and **permissive** — once a device conn
 ### The Solution
 
 SafeNet creates **micro-perimeters** around device groups with:
-- 🔐 **Zero-Trust Architecture**: Default deny, explicit allow
-- 📜 **Declarative Policies**: Define network rules in YAML
-- 🚀 **WireGuard Mesh**: Encrypted peer-to-peer communication
-- 🔒 **Memory-Only Keys**: Private keys never touch disk
-- ⚡ **Fully Async**: Non-blocking I/O for maximum performance
+- **Zero-Trust Architecture**: Default deny, explicit allow
+- **Declarative Policies**: Define network rules in YAML
+- **WireGuard Mesh**: Encrypted peer-to-peer communication
+- **Memory-Only Keys**: Private keys never touch disk
+- **Fully Async**: Non-blocking I/O for maximum performance
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 ### Implemented (Phases 1-3)
 
-✅ **In-Memory Cryptography Engine** (Phase 1)
+[COMPLETE] **In-Memory Cryptography Engine** (Phase 1)
 - Async WireGuard key generation
 - Zero-disk-key architecture
 - Subprocess security (command injection prevention)
 
-✅ **YAML Policy Parser** (Phase 2)
+[COMPLETE] **YAML Policy Parser** (Phase 2)
 - Declarative security-as-code
 - Strict input validation via Pydantic
 - Safe YAML loading (prevents code injection)
 
-✅ **Async Database Layer** (Phase 2)
+[COMPLETE] **Async Database Layer** (Phase 2)
 - SQLite with `aiosqlite` for non-blocking I/O
 - Parameterized queries (SQL injection prevention)
 - Device and group management
 
-✅ **WireGuard Subprocess Driver** (Phase 3)
+[COMPLETE] **WireGuard Subprocess Driver** (Phase 3)
 - Async tunnel lifecycle management (start/stop/status)
 - WireGuard INI config generation
 - Windows network stack control (live validated)
@@ -81,33 +81,33 @@ SafeNet creates **micro-perimeters** around device groups with:
 
 ### Coming Soon (Phases 4-5)
 
-🔨 **FastAPI Endpoints** (Phase 4)
+[IN PROGRESS] **FastAPI Endpoints** (Phase 4)
 - RESTful API with JWT authentication
 - TLS/HTTPS enforcement
 - Device enrollment and management
 
-🔨 **Typer CLI Interface** (Phase 5)
+[IN PROGRESS] **Typer CLI Interface** (Phase 5)
 - Command-line management tools
 - Interactive setup wizard
 - Status monitoring
 
 ---
 
-## 📊 Project Status
+## Project Status
 
 | Phase | Component | Status | Tests |
 |-------|-----------|--------|-------|
-| **Phase 1** | In-Memory Cryptography | ✅ Complete | 4/4 Passing |
-| **Phase 2** | Policy Parser & Database | ✅ Complete | 7/7 Passing |
-| **Phase 3** | WireGuard Subprocess Driver | ✅ Complete + Live Tested | 9/9 Passing |
-| **Phase 4** | FastAPI Endpoints | 🔨 In Progress | - |
-| **Phase 5** | Typer CLI Interface | 📋 Planned | - |
+| **Phase 1** | In-Memory Cryptography | [COMPLETE] Complete | 4/4 Passing |
+| **Phase 2** | Policy Parser & Database | [COMPLETE] Complete | 7/7 Passing |
+| **Phase 3** | WireGuard Subprocess Driver | [COMPLETE] Complete + Live Tested | 9/9 Passing |
+| **Phase 4** | FastAPI Endpoints | [IN PROGRESS] In Progress | - |
+| **Phase 5** | Typer CLI Interface | Planned | - |
 
 **Current Version**: `0.3.0` (Phase 3 Complete - Network Validated)
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### The "Antigravity" Security Model
 
@@ -115,13 +115,13 @@ SafeNet follows a hardened architecture with multiple defense layers:
 
 ```mermaid
 graph TD
-    A[YAML Policy File] -->|yaml.safe_load| B[Pydantic Validation]
-    B -->|Strict Regex| C[Async Database]
-    C -->|Parameterized Queries| D[SQLite State]
-    E[WireGuard Keys] -->|Memory Only| F[Async Subprocess]
-    F -->|No Shell Injection| G[wg.exe]
-    B -->|Validated Config| H[WireGuard Mesh]
-    D -->|Public Keys Only| H
+ A[YAML Policy File] -->|yaml.safe_load| B[Pydantic Validation]
+ B -->|Strict Regex| C[Async Database]
+ C -->|Parameterized Queries| D[SQLite State]
+ E[WireGuard Keys] -->|Memory Only| F[Async Subprocess]
+ F -->|No Shell Injection| G[wg.exe]
+ B -->|Validated Config| H[WireGuard Mesh]
+ D -->|Public Keys Only| H
 ```
 
 ### Security Principles
@@ -136,19 +136,19 @@ graph TD
 
 ```
 User Policy (YAML) 
-    ↓
+ ↓
 Pydantic Validation (Regex Checks)
-    ↓
+ ↓
 Async SQLite Database (Public Keys Only)
-    ↓
+ ↓
 WireGuard Config Generation
-    ↓
+ ↓
 Encrypted Mesh Network
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Core Technologies
 
@@ -171,18 +171,18 @@ Encrypted Mesh Network
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
 1. **Python 3.10+**
-   ```powershell
-   python --version
-   ```
+ ```powershell
+ python --version
+ ```
 
 2. **WireGuard for Windows**
-   - Download: https://www.wireguard.com/install/
-   - Add to PATH: `C:\Program Files\WireGuard`
+ - Download: https://www.wireguard.com/install/
+ - Add to PATH: `C:\Program Files\WireGuard`
 
 3. **Git** (for cloning)
 
@@ -211,21 +211,21 @@ $env:Path += ";C:\Program Files\WireGuard"
 python tests\run_all_tests.py
 
 # Or run individual phases
-python tests\test_phase1.py  # Phase 1: Cryptography
-python tests\test_phase2.py  # Phase 2: Policy & DB
-python tests\test_phase3.py  # Phase 3: WireGuard Driver
+python tests\test_phase1.py # Phase 1: Cryptography
+python tests\test_phase2.py # Phase 2: Policy & DB
+python tests\test_phase3.py # Phase 3: WireGuard Driver
 ```
 
 Expected output:
 ```
-  Phase 1: PASSED (4/4 tests)
-  Phase 2: PASSED (7/7 tests)
-  Phase 3: PASSED (9/9 tests)
+ Phase 1: PASSED (4/4 tests)
+ Phase 2: PASSED (7/7 tests)
+ Phase 3: PASSED (9/9 tests)
 ```
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Run All Tests
 
@@ -234,8 +234,8 @@ Expected output:
 python tests\run_all_tests.py
 
 # Individual phases
-python tests\test_phase1.py  # Cryptography engine
-python tests\test_phase2.py  # Policy parser & database
+python tests\test_phase1.py # Cryptography engine
+python tests\test_phase2.py # Policy parser & database
 ```
 
 ### Test Coverage
@@ -257,70 +257,70 @@ See [`tests/README.md`](tests/README.md) for detailed test documentation.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 safenet-soho-security-framework/
 │
-├── core/                   # Core framework components
-│   ├── __init__.py        # Module exports (v0.3.0)
-│   ├── keygen.py          # ✅ In-memory key generation (Phase 1)
-│   ├── schemas.py         # ✅ Pydantic validation models (Phase 2)
-│   ├── db.py              # ✅ Async SQLite database (Phase 2)
-│   ├── policy.py          # ✅ YAML policy parser (Phase 2)
-│   └── engine.py          # ✅ WireGuard subprocess driver (Phase 3)
+├── core/ # Core framework components
+│ ├── __init__.py # Module exports (v0.3.0)
+│ ├── keygen.py # [COMPLETE] In-memory key generation (Phase 1)
+│ ├── schemas.py # [COMPLETE] Pydantic validation models (Phase 2)
+│ ├── db.py # [COMPLETE] Async SQLite database (Phase 2)
+│ ├── policy.py # [COMPLETE] YAML policy parser (Phase 2)
+│ └── engine.py # [COMPLETE] WireGuard subprocess driver (Phase 3)
 │
-├── api/                    # FastAPI endpoints (Phase 4)
-│   └── __init__.py
+├── api/ # FastAPI endpoints (Phase 4)
+│ └── __init__.py
 │
-├── cli/                    # Typer CLI interface (Phase 5)
-│   └── __init__.py
+├── cli/ # Typer CLI interface (Phase 5)
+│ └── __init__.py
 │
-├── data/                   # Runtime data and policies
-│   ├── policy.yml         # ✅ Network policy configuration
-│   └── safenet.db         # SQLite database (auto-generated)
+├── data/ # Runtime data and policies
+│ ├── policy.yml # [COMPLETE] Network policy configuration
+│ └── safenet.db # SQLite database (auto-generated)
 │
-├── tests/                  # Test suite
-│   ├── __init__.py        # Test module init
-│   ├── test_phase1.py     # ✅ Phase 1 validation tests
-│   ├── test_phase2.py     # ✅ Phase 2 validation tests
-│   ├── test_phase3.py     # ✅ Phase 3 validation tests
-│   ├── test_engine.py     # ✅ Live network validation test
-│   ├── test_tunnel_manual.py  # Manual tunnel lifecycle test
-│   ├── run_all_tests.py   # Test runner (all 3 phases)
-│   └── README.md          # Test documentation
+├── tests/ # Test suite
+│ ├── __init__.py # Test module init
+│ ├── test_phase1.py # [COMPLETE] Phase 1 validation tests
+│ ├── test_phase2.py # [COMPLETE] Phase 2 validation tests
+│ ├── test_phase3.py # [COMPLETE] Phase 3 validation tests
+│ ├── test_engine.py # [COMPLETE] Live network validation test
+│ ├── test_tunnel_manual.py # Manual tunnel lifecycle test
+│ ├── run_all_tests.py # Test runner (all 3 phases)
+│ └── README.md # Test documentation
 │
-├── docs/                   # Documentation
-│   ├── phase1_implementation.md
-│   ├── phase1_validation_success.md
-│   ├── phase2_validation_success.md
-│   ├── phase2_complete.md
-│   ├── phase3_validation_success.md  # ✅ Phase 3 validation
-│   ├── phase3_final_validation.md     # ✅ Live network test
-│   ├── phase3_complete.md
-│   └── windows_setup_commands.md
+├── docs/ # Documentation
+│ ├── phase1_implementation.md
+│ ├── phase1_validation_success.md
+│ ├── phase2_validation_success.md
+│ ├── phase2_complete.md
+│ ├── phase3_validation_success.md # [COMPLETE] Phase 3 validation
+│ ├── phase3_final_validation.md # [COMPLETE] Live network test
+│ ├── phase3_complete.md
+│ └── windows_setup_commands.md
 │
-├── reference/              # Design documents
-│   ├── Project SafeNet... .pdf  # Original research document
-│   ├── architecture.md    # "Antigravity" architecture
-│   ├── phase1.md          # Phase 1 specifications
-│   ├── phase2.md          # Phase 2 specifications
-│   └── phase3.md          # Phase 3 specifications
+├── reference/ # Design documents
+│ ├── Project SafeNet... .pdf # Original research document
+│ ├── architecture.md # "Antigravity" architecture
+│ ├── phase1.md # Phase 1 specifications
+│ ├── phase2.md # Phase 2 specifications
+│ └── phase3.md # Phase 3 specifications
 │
-├── certs/                  # TLS certificates (Phase 4)
-├── .git/                   # Git repository
-├── venv/                   # Python virtual environment
-├── LICENSE                 # GPL-3.0 license
-├── TESTING.md             # ✅ Test execution guide
-├── requirements.txt        # Python dependencies
-└── README.md              # This file
+├── certs/ # TLS certificates (Phase 4)
+├── .git/ # Git repository
+├── venv/ # Python virtual environment
+├── LICENSE # GPL-3.0 license
+├── TESTING.md # [COMPLETE] Test execution guide
+├── requirements.txt # Python dependencies
+└── README.md # This file
 ```
 
 ---
 
-## 🗺️ Development Roadmap
+## Development Roadmap
 
-### ✅ Phase 1: Environment Setup & In-Memory Cryptography (Complete)
+### [COMPLETE] Phase 1: Environment Setup & In-Memory Cryptography (Complete)
 
 - [x] Project structure initialization
 - [x] Async WireGuard key generation
@@ -332,7 +332,7 @@ safenet-soho-security-framework/
 
 ---
 
-### ✅ Phase 2: YAML Policy Parser & Database (Complete)
+### [COMPLETE] Phase 2: YAML Policy Parser & Database (Complete)
 
 - [x] Pydantic validation schemas
 - [x] Async SQLite database layer
@@ -345,7 +345,7 @@ safenet-soho-security-framework/
 
 ---
 
-### ✅ Phase 3: Windows WireGuard Subprocess Driver (Complete)
+### [COMPLETE] Phase 3: Windows WireGuard Subprocess Driver (Complete)
 
 - [x] `core/engine.py` implementation
 - [x] WireGuard config file generation (INI format)
@@ -355,11 +355,11 @@ safenet-soho-security-framework/
 - [x] Comprehensive test suite (9 tests)
 - [x] Live network validation (ipconfig verified)
 
-**Validation**: 2026-02-13 | **Tests**: 9/9 Passing | **Live**: ✅ Network Stack Control Proven
+**Validation**: 2026-02-13 | **Tests**: 9/9 Passing | **Live**: [COMPLETE] Network Stack Control Proven
 
 ---
 
-### 📋 Phase 4: FastAPI Endpoints & JWT Authentication (Planned)
+### Phase 4: FastAPI Endpoints & JWT Authentication (Planned)
 
 - [ ] FastAPI application setup
 - [ ] Protected API endpoints
@@ -372,7 +372,7 @@ safenet-soho-security-framework/
 
 ---
 
-### 📋 Phase 5: Typer CLI Interface (Planned)
+### Phase 5: Typer CLI Interface (Planned)
 
 - [ ] CLI command structure
 - [ ] Device management commands
@@ -385,7 +385,7 @@ safenet-soho-security-framework/
 
 ---
 
-## 🔒 Security
+## Security
 
 ### Attack Surface Mitigation
 
@@ -409,7 +409,7 @@ See validation reports in [`docs/`](docs/) for detailed security analysis.
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 ### User Documentation
 
@@ -431,7 +431,7 @@ See validation reports in [`docs/`](docs/) for detailed security analysis.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! This project is licensed under GPL-3.0.
 
@@ -446,19 +446,19 @@ Please ensure all security tests pass before submitting.
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
 **Key Points:**
-- ✅ Free to use, modify, and distribute
-- ✅ Source code must remain open
-- ✅ Derivative works must use GPL-3.0
-- ❌ No warranty provided
+- [COMPLETE] Free to use, modify, and distribute
+- [COMPLETE] Source code must remain open
+- [COMPLETE] Derivative works must use GPL-3.0
+- [NO] No warranty provided
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **WireGuard**: Modern, fast VPN protocol
 - **FastAPI**: High-performance async web framework
@@ -468,7 +468,7 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 <div align="center">
 
-**Built with ❤️ for Zero-Trust SOHO Security**
+**Built with for Zero-Trust SOHO Security**
 
 [Report Bug](https://github.com/alvin-alvo/safenet-soho-security-framework/issues) • [Request Feature](https://github.com/alvin-alvo/safenet-soho-security-framework/issues)
 

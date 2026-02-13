@@ -42,8 +42,8 @@ When checking tunnel status, you'll see state codes:
 | 4 | RUNNING | Service is running |
 
 **Normal test flow:**
-- After start: State 2 (START_PENDING) or 4 (RUNNING) ✅
-- After stop: State 1 (STOPPED) or 3 (STOP_PENDING) ✅
+- After start: State 2 (START_PENDING) or 4 (RUNNING) [COMPLETE]
+- After stop: State 1 (STOPPED) or 3 (STOP_PENDING) [COMPLETE]
 
 ---
 
@@ -79,4 +79,4 @@ This tests:
 
 ---
 
-**Phase 3 is production-ready!** ✅
+**Phase 3 is production-ready!** [COMPLETE]

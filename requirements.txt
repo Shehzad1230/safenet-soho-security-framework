@@ -20,10 +20,11 @@ PyYAML>=6.0.1             # Safe YAML parsing (yaml.safe_load)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Phase 4: FastAPI Endpoints & JWT Authentication
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# fastapi[all]>=0.109.0   # Modern async web framework
-# uvicorn[standard]>=0.27.0  # ASGI server with TLS support
-# python-jose[cryptography]>=3.3.0  # JWT token handling
-# passlib[bcrypt]>=1.7.4  # Password hashing
+fastapi>=0.109.0   # Modern async web framework
+uvicorn[standard]>=0.27.0  # ASGI server with hot reload
+python-jose[cryptography]>=3.3.0  # JWT token handling (HS256)
+passlib[bcrypt]>=1.7.4  # Password hashing with bcrypt
+python-multipart>=0.0.6  # Form data parsing
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Phase 5: Typer CLI Interface

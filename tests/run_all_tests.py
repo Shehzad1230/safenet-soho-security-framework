@@ -19,6 +19,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from tests.test_phase1 import test_phase1
 from tests.test_phase2 import test_phase2
 from tests.test_phase3 import test_phase3
+from tests.test_phase4 import run_all_tests as test_phase4
 
 
 async def run_all_tests():
@@ -69,6 +70,18 @@ async def run_all_tests():
     except Exception as e:
         print(f"Phase 3 tests failed with error: {e}")
         results['Phase 3'] = False
+    
+    print("\n\n")
+    
+    # Phase 4
+    print("Running Phase 4 Tests...")
+    print("-" * 70)
+    try:
+        result = test_phase4()  # Note: Phase 4 is synchronous (uses TestClient)
+        results['Phase 4'] = result
+    except Exception as e:
+        print(f"Phase 4 tests failed with error: {e}")
+        results['Phase 4'] = False
     
     # Summary
     print("\n\n")

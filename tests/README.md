@@ -44,7 +44,7 @@ python tests\test_tunnel_manual.py
 
 This script performs full tunnel lifecycle testing:
 - Generates fresh WireGuard keys
-- Creates tunnel configuration  
+- Creates tunnel configuration 
 - Starts tunnel (installs Windows service)
 - Checks tunnel status
 - Stops tunnel (removes Windows service)
@@ -55,7 +55,7 @@ This script performs full tunnel lifecycle testing:
 python tests\test_engine.py
 ```
 
-**PROVEN WORKING** ✅ - This script:
+**PROVEN WORKING** [COMPLETE] - This script:
 - Creates a REAL WireGuard tunnel on Windows
 - Holds it open for 30 seconds
 - Instructions to verify with `ipconfig` (look for IP 10.8.0.1)
@@ -72,15 +72,15 @@ python tests\run_all_tests.py
 
 ## Test Coverage
 
-### Phase 1: In-Memory Cryptography Engine ✅
+### Phase 1: In-Memory Cryptography Engine [COMPLETE]
 - [x] Async key generation via `asyncio.subprocess`
 - [x] WireGuard key format validation (44-char Base64)
 - [x] Cryptographic randomness verification
 - [x] Zero-disk-key architecture validation
 
-**Status**: ✅ PASSING
+**Status**: [COMPLETE] PASSING
 
-### Phase 2: YAML Policy Parser & Database ✅
+### Phase 2: YAML Policy Parser & Database [COMPLETE]
 - [x] Pydantic schema validation
 - [x] YAML policy parser (`yaml.safe_load`)
 - [x] Async SQLite database (aiosqlite)
@@ -89,31 +89,31 @@ python tests\run_all_tests.py
 - [x] Foreign key constraints
 - [x] Group membership queries
 
-**Status**: ✅ PASSING
+**Status**: [COMPLETE] PASSING
 
-### Phase 3: WireGuard Subprocess Driver 🔨
+### Phase 3: WireGuard Subprocess Driver [IN PROGRESS]
 - [ ] WireGuard config file generation
 - [ ] Tunnel lifecycle management
 - [ ] IP address assignment
 - [ ] Configuration validation
 
-**Status**: 🔨 NOT YET IMPLEMENTED
+**Status**: [IN PROGRESS] NOT YET IMPLEMENTED
 
-### Phase 4: FastAPI Endpoints & Authentication 🔨
-**Status**: 🔨 NOT YET IMPLEMENTED
+### Phase 4: FastAPI Endpoints & Authentication [IN PROGRESS]
+**Status**: [IN PROGRESS] NOT YET IMPLEMENTED
 
-### Phase 5: Typer CLI Interface 🔨
-**Status**: 🔨 NOT YET IMPLEMENTED
+### Phase 5: Typer CLI Interface [IN PROGRESS]
+**Status**: [IN PROGRESS] NOT YET IMPLEMENTED
 
 ## Test Organization
 
 ```
 tests/
-├── __init__.py              # Test package initialization
-├── test_phase1.py           # Phase 1 validation tests
-├── test_phase2.py           # Phase 2 validation tests
-├── test_phase3.py           # Phase 3 validation tests (placeholder)
-└── run_all_tests.py         # Test runner for all phases
+├── __init__.py # Test package initialization
+├── test_phase1.py # Phase 1 validation tests
+├── test_phase2.py # Phase 2 validation tests
+├── test_phase3.py # Phase 3 validation tests (placeholder)
+└── run_all_tests.py # Test runner for all phases
 ```
 
 ## Requirements

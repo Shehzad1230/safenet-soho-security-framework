@@ -1,5 +1,5 @@
 
-### 🏗️ The Hardened "Antigravity" Architecture
+### ️ The Hardened "Antigravity" Architecture
 
 To ensure maximum performance without compromising on strict security, the entire architecture must be **Asynchronous**, **Authenticated**, and **Input-Sanitized**.
 
@@ -34,7 +34,7 @@ To ensure maximum performance without compromising on strict security, the entir
 
 ---
 
-### 📂 The Secure Project Structure
+### The Secure Project Structure
 
 Here is how you should structure your project directory to isolate sensitive components:
 
@@ -42,26 +42,26 @@ Here is how you should structure your project directory to isolate sensitive com
 safenet/
 │
 ├── core/
-│   ├── engine.py       # Async subprocess calls (Strictly sanitized)
-│   ├── keygen.py       # Cryptographic generation (Memory-only private keys)
-│   └── policy.py       # YAML parser with strict schema validation
+│ ├── engine.py # Async subprocess calls (Strictly sanitized)
+│ ├── keygen.py # Cryptographic generation (Memory-only private keys)
+│ └── policy.py # YAML parser with strict schema validation
 │
 ├── api/
-│   ├── main.py         # FastAPI application with TLS/HTTPS config
-│   ├── routes.py       # API endpoints
-│   ├── auth.py         # Security dependencies (API Key / JWT validation)
-│   └── schemas.py      # Pydantic models for strict input validation
+│ ├── main.py # FastAPI application with TLS/HTTPS config
+│ ├── routes.py # API endpoints
+│ ├── auth.py # Security dependencies (API Key / JWT validation)
+│ └── schemas.py # Pydantic models for strict input validation
 │
 ├── cli/
-│   └── console.py      # Typer CLI application
+│ └── console.py # Typer CLI application
 │
-├── data/               # Directory strictly permission-locked (OS-level)
-│   ├── policy.yml      # Zero-Trust rules
-│   └── safenet.db      # SQLite database (Stores Public Keys ONLY)
+├── data/ # Directory strictly permission-locked (OS-level)
+│ ├── policy.yml # Zero-Trust rules
+│ └── safenet.db # SQLite database (Stores Public Keys ONLY)
 │
-├── certs/              # SSL/TLS Certificates for HTTPS API
-│   ├── server.crt
-│   └── server.key
+├── certs/ # SSL/TLS Certificates for HTTPS API
+│ ├── server.crt
+│ └── server.key
 │
 └── requirements.txt
 
@@ -69,7 +69,7 @@ safenet/
 
 ---
 
-### 🔌 The Protected API Endpoints (For Flutter & Web)
+### The Protected API Endpoints (For Flutter & Web)
 
 Your FastAPI backend (`api/routes.py`) serves as the bridge. Every endpoint here (except perhaps an initial login) must be protected by an authentication dependency.
 
@@ -102,29 +102,29 @@ app = typer.Typer()
 
 @app.command()
 def start():
-    """Starts the SafeNet WireGuard Tunnel on Windows"""
-    typer.echo("🚀 Initiating Antigravity... Starting SafeNet Tunnel.")
-    # Executes the secure engine logic
-    
+ """Starts the SafeNet WireGuard Tunnel on Windows"""
+ typer.echo(" Initiating Antigravity... Starting SafeNet Tunnel.")
+ # Executes the secure engine logic
+ 
 @app.command()
 def add_device(name: str):
-    """Enrolls a new device and generates its keys securely"""
-    # Strict regex check on 'name' happens here before proceeding
-    if not name.isalnum():
-        typer.echo("⚠️ Security Error: Device name must be alphanumeric.")
-        raise typer.Abort()
-        
-    typer.echo(f"Adding device: {name}...")
-    # Call core keygen logic
+ """Enrolls a new device and generates its keys securely"""
+ # Strict regex check on 'name' happens here before proceeding
+ if not name.isalnum():
+ typer.echo("️ Security Error: Device name must be alphanumeric.")
+ raise typer.Abort()
+ 
+ typer.echo(f"Adding device: {name}...")
+ # Call core keygen logic
 
 if __name__ == "__main__":
-    app()
+ app()
 
 ```
 
 ---
 
-### ⚙️ How to Control WireGuard on Windows via Python securely
+### ️ How to Control WireGuard on Windows via Python securely
 
 Your Python `core/engine.py` will use `asyncio.create_subprocess_exec` to control the official Windows WireGuard executable.
 
