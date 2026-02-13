@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 # Import test modules
 from tests.test_phase1 import test_phase1
 from tests.test_phase2 import test_phase2
+from tests.test_phase3 import test_phase3
 
 
 async def run_all_tests():
@@ -56,6 +57,18 @@ async def run_all_tests():
     except Exception as e:
         print(f"Phase 2 tests failed with error: {e}")
         results['Phase 2'] = False
+    
+    print("\n\n")
+    
+    # Phase 3
+    print("Running Phase 3 Tests...")
+    print("-" * 70)
+    try:
+        result = await test_phase3()
+        results['Phase 3'] = result
+    except Exception as e:
+        print(f"Phase 3 tests failed with error: {e}")
+        results['Phase 3'] = False
     
     # Summary
     print("\n\n")

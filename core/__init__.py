@@ -9,6 +9,7 @@ Components:
 - schemas: Pydantic validation models for policy configuration
 - db: Async SQLite database for network state management
 - policy: YAML policy parser with strict validation
+- engine: Async WireGuard tunnel management (Windows)
 
 Security Architecture: "Antigravity"
 - Zero-disk-key cryptography
@@ -17,7 +18,7 @@ Security Architecture: "Antigravity"
 - TLS/HTTPS enforced communications
 """
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __author__ = "SafeNet Development Team"
 
 # Import key generation function for module-level access
@@ -52,6 +53,14 @@ from .schemas import (
     is_valid_wireguard_key
 )
 
+# Import WireGuard engine (Phase 3)
+from .engine import (
+    generate_config_string,
+    start_safenet_tunnel,
+    stop_safenet_tunnel,
+    get_tunnel_status
+)
+
 __all__ = [
     # Keygen
     "generate_wireguard_keys",
@@ -78,4 +87,10 @@ __all__ = [
     "AccessAction",
     "is_valid_device_name",
     "is_valid_wireguard_key",
+    
+    # Engine (Phase 3)
+    "generate_config_string",
+    "start_safenet_tunnel",
+    "stop_safenet_tunnel",
+    "get_tunnel_status",
 ]

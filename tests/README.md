@@ -17,6 +17,53 @@ python tests\test_phase2.py
 python tests\test_phase3.py
 ```
 
+### Phase 3 Tests
+
+**File**: `test_phase3.py`
+
+**Purpose**: Validates Windows WireGuard subprocess driver implementation
+
+**Test Coverage**:
+- WireGuard config generation (INI format)
+- Multi-peer configuration support
+- Windows absolute path resolution
+- Command injection prevention (no `shell=True`)
+- List-based subprocess arguments
+- Async subprocess execution
+- Tunnel lifecycle (skipped if not admin)
+
+**Run Command**:
+```powershell
+python tests\test_phase3.py
+```
+
+**Manual Tunnel Test** (Requires Admin):
+```powershell
+python tests\test_tunnel_manual.py
+```
+
+This script performs full tunnel lifecycle testing:
+- Generates fresh WireGuard keys
+- Creates tunnel configuration  
+- Starts tunnel (installs Windows service)
+- Checks tunnel status
+- Stops tunnel (removes Windows service)
+- Verifies cleanup
+
+**Live Network Validation Test** (Recommended - Requires Admin):
+```powershell
+python tests\test_engine.py
+```
+
+**PROVEN WORKING** ✅ - This script:
+- Creates a REAL WireGuard tunnel on Windows
+- Holds it open for 30 seconds
+- Instructions to verify with `ipconfig` (look for IP 10.8.0.1)
+- Automatically cleans up
+- **Validates Python control of Windows network stack**
+
+See [TESTING.md](../TESTING.md) for detailed testing guide.
+
 ### Run All Tests
 
 ```powershell
