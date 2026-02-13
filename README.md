@@ -7,7 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![WireGuard](https://img.shields.io/badge/WireGuard-Latest-green.svg)](https://www.wireguard.com/)
 [![License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
-[![Phase](https://img.shields.io/badge/Phase-2%20Complete-brightgreen.svg)](#project-status)
+[![Phase](https://img.shields.io/badge/Phase-3%20Complete-brightgreen.svg)](#project-status)
 
 *Policy-driven, asynchronous, and hardened against injection attacks*
 
@@ -55,29 +55,31 @@ SafeNet creates **micro-perimeters** around device groups with:
 
 ## ✨ Key Features
 
-### Implemented (Phases 1-2)
+### Implemented (Phases 1-3)
 
-✅ **In-Memory Cryptography Engine**
+✅ **In-Memory Cryptography Engine** (Phase 1)
 - Async WireGuard key generation
 - Zero-disk-key architecture
 - Subprocess security (command injection prevention)
 
-✅ **YAML Policy Parser**
+✅ **YAML Policy Parser** (Phase 2)
 - Declarative security-as-code
 - Strict input validation via Pydantic
 - Safe YAML loading (prevents code injection)
 
-✅ **Async Database Layer**
+✅ **Async Database Layer** (Phase 2)
 - SQLite with `aiosqlite` for non-blocking I/O
 - Parameterized queries (SQL injection prevention)
 - Device and group management
 
-### Coming Soon (Phases 3-5)
+✅ **WireGuard Subprocess Driver** (Phase 3)
+- Async tunnel lifecycle management (start/stop/status)
+- WireGuard INI config generation
+- Windows network stack control (live validated)
+- Absolute path resolution for Windows services
+- Secure config cleanup
 
-🔨 **WireGuard Subprocess Driver** (Phase 3)
-- Tunnel lifecycle management (start/stop/status)
-- Config file generation
-- IP address assignment
+### Coming Soon (Phases 4-5)
 
 🔨 **FastAPI Endpoints** (Phase 4)
 - RESTful API with JWT authentication
@@ -205,17 +207,20 @@ pip install -r requirements.txt
 # Add WireGuard to PATH (if not already)
 $env:Path += ";C:\Program Files\WireGuard"
 
-# Run Phase 1 tests
-python tests\test_phase1.py
+# Run all tests
+python tests\run_all_tests.py
 
-# Run Phase 2 tests
-python tests\test_phase2.py
+# Or run individual phases
+python tests\test_phase1.py  # Phase 1: Cryptography
+python tests\test_phase2.py  # Phase 2: Policy & DB
+python tests\test_phase3.py  # Phase 3: WireGuard Driver
 ```
 
 Expected output:
 ```
-Phase 1 Status: VALIDATED ✓
-Phase 2 Status: VALIDATED ✓
+  Phase 1: PASSED (4/4 tests)
+  Phase 2: PASSED (7/7 tests)
+  Phase 3: PASSED (9/9 tests)
 ```
 
 ---
@@ -237,6 +242,16 @@ python tests\test_phase2.py  # Policy parser & database
 
 - **Phase 1**: 4 tests (key generation, format, randomness, zero-disk)
 - **Phase 2**: 7 tests (schema, YAML, database, SQL injection, etc.)
+- **Phase 3**: 9 tests (config generation, paths, security, tunnel lifecycle)
+
+### Live Network Validation (Phase 3)
+
+```powershell
+# Requires Administrator privileges
+python tests\test_engine.py
+```
+
+This creates a real WireGuard tunnel and validates Python control of the Windows network stack via `ipconfig`.
 
 See [`tests/README.md`](tests/README.md) for detailed test documentation.
 
@@ -248,11 +263,12 @@ See [`tests/README.md`](tests/README.md) for detailed test documentation.
 safenet-soho-security-framework/
 │
 ├── core/                   # Core framework components
-│   ├── __init__.py        # Module exports
+│   ├── __init__.py        # Module exports (v0.3.0)
 │   ├── keygen.py          # ✅ In-memory key generation (Phase 1)
 │   ├── schemas.py         # ✅ Pydantic validation models (Phase 2)
 │   ├── db.py              # ✅ Async SQLite database (Phase 2)
-│   └── policy.py          # ✅ YAML policy parser (Phase 2)
+│   ├── policy.py          # ✅ YAML policy parser (Phase 2)
+│   └── engine.py          # ✅ WireGuard subprocess driver (Phase 3)
 │
 ├── api/                    # FastAPI endpoints (Phase 4)
 │   └── __init__.py
@@ -262,27 +278,40 @@ safenet-soho-security-framework/
 │
 ├── data/                   # Runtime data and policies
 │   ├── policy.yml         # ✅ Network policy configuration
-│   └── safenet.db         # SQLite database (generated)
+│   └── safenet.db         # SQLite database (auto-generated)
 │
 ├── tests/                  # Test suite
+│   ├── __init__.py        # Test module init
 │   ├── test_phase1.py     # ✅ Phase 1 validation tests
 │   ├── test_phase2.py     # ✅ Phase 2 validation tests
-│   ├── test_phase3.py     # Phase 3 tests (placeholder)
-│   ├── run_all_tests.py   # Test runner
+│   ├── test_phase3.py     # ✅ Phase 3 validation tests
+│   ├── test_engine.py     # ✅ Live network validation test
+│   ├── test_tunnel_manual.py  # Manual tunnel lifecycle test
+│   ├── run_all_tests.py   # Test runner (all 3 phases)
 │   └── README.md          # Test documentation
 │
 ├── docs/                   # Documentation
+│   ├── phase1_implementation.md
 │   ├── phase1_validation_success.md
 │   ├── phase2_validation_success.md
 │   ├── phase2_complete.md
+│   ├── phase3_validation_success.md  # ✅ Phase 3 validation
+│   ├── phase3_final_validation.md     # ✅ Live network test
+│   ├── phase3_complete.md
 │   └── windows_setup_commands.md
 │
 ├── reference/              # Design documents
+│   ├── Project SafeNet... .pdf  # Original research document
 │   ├── architecture.md    # "Antigravity" architecture
 │   ├── phase1.md          # Phase 1 specifications
-│   └── phase2.md          # Phase 2 specifications
+│   ├── phase2.md          # Phase 2 specifications
+│   └── phase3.md          # Phase 3 specifications
 │
 ├── certs/                  # TLS certificates (Phase 4)
+├── .git/                   # Git repository
+├── venv/                   # Python virtual environment
+├── LICENSE                 # GPL-3.0 license
+├── TESTING.md             # ✅ Test execution guide
 ├── requirements.txt        # Python dependencies
 └── README.md              # This file
 ```
@@ -316,16 +345,17 @@ safenet-soho-security-framework/
 
 ---
 
-### 🔨 Phase 3: Windows WireGuard Subprocess Driver (In Progress)
+### ✅ Phase 3: Windows WireGuard Subprocess Driver (Complete)
 
-- [ ] `core/engine.py` implementation
-- [ ] WireGuard config file generation
-- [ ] Tunnel lifecycle management (start/stop/status)
-- [ ] IP address assignment logic
-- [ ] Configuration validation
-- [ ] Test suite
+- [x] `core/engine.py` implementation
+- [x] WireGuard config file generation (INI format)
+- [x] Tunnel lifecycle management (start/stop/status)
+- [x] Absolute path resolution for Windows services
+- [x] Security constraints (zero command injection)
+- [x] Comprehensive test suite (9 tests)
+- [x] Live network validation (ipconfig verified)
 
-**Target**: TBD
+**Validation**: 2026-02-13 | **Tests**: 9/9 Passing | **Live**: ✅ Network Stack Control Proven
 
 ---
 
@@ -385,15 +415,19 @@ See validation reports in [`docs/`](docs/) for detailed security analysis.
 
 - [Windows Setup Commands](docs/windows_setup_commands.md) - Installation guide
 - [Test Documentation](tests/README.md) - Running tests
-- [Phase 2 Complete](docs/phase2_complete.md) - Current status summary
+- [Testing Guide](TESTING.md) - Phase 3 live network testing
+- [Phase 3 Complete](docs/phase3_complete.md) - Current status summary
 
 ### Implementation Documentation
 
 - [Phase 1 Validation Report](docs/phase1_validation_success.md)
 - [Phase 2 Validation Report](docs/phase2_validation_success.md)
+- [Phase 3 Validation Report](docs/phase3_validation_success.md)
+- [Phase 3 Live Network Test](docs/phase3_final_validation.md)
 - [Architecture Overview](reference/architecture.md) 
 - [Phase 1 Specifications](reference/phase1.md)
 - [Phase 2 Specifications](reference/phase2.md)
+- [Phase 3 Specifications](reference/phase3.md)
 
 ---
 
